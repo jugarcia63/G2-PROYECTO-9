@@ -1,3 +1,104 @@
 Codigo de menu:
 
 https://onlinegdb.com/UvCzAnvr4
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Estructura para representar a un jugador
+struct Jugador {
+    string nombre;
+    int edad;
+    string posicion;
+    string pais;
+    int numeroCamisa;
+    int anioParticipacion;
+};
+
+int main() {
+    char opcion;
+    vector<Jugador> jugadores; // Vector para almacenar jugadores
+
+    do {
+        cout << "  Bienvenido a mi album futbolistico digital\n";
+        cout << "  ====================================\n";
+        cout << "  1.  Agregar jugador\n";
+        cout << "  2.  Modificar la información de un jugador\n";
+        cout << "  3.  Visualizar la ficha técnica de un jugador\n";
+        cout << "  4.  Buscar un jugador por su número de camiseta, país y año en el que participó en el mundial.\n";        
+        cout << "  5.  Conocer los equipos del álbum que participaron en un año dado\n";        
+        cout << "  6. Conocer la edad más común de un equipo\n";        
+        cout << "  7. Conocer el porcentaje de completitud del álbum, discriminado por tipo de lámina\n";        
+        cout << "  8.  Exit\n";
+        cout << "  ====================================\n";
+        cout << "  Ingresa una opcion: ";
+        cin >> opcion;
+        cout << endl;
+
+        switch (opcion) {
+            case '1': {
+                // Agregar jugador
+                Jugador nuevoJugador;
+                cout << "Ingrese el nombre del jugador: ";
+                cin >> nuevoJugador.nombre;
+                cout << "Ingrese la edad del jugador: ";
+                cin >> nuevoJugador.edad;
+                cout << "Ingrese la posición del jugador: ";
+                cin >> nuevoJugador.posicion;
+                cout << "Ingrese el país del jugador: ";
+                cin >> nuevoJugador.pais;
+                cout << "Ingrese el número de camiseta: ";
+                cin >> nuevoJugador.numeroCamisa;
+                cout << "Ingrese el año de participación: ";
+                cin >> nuevoJugador.anioParticipacion;
+
+                jugadores.push_back(nuevoJugador); // Agregar jugador al vector
+                cout << "Jugador agregado exitosamente.\n\n";
+                break;
+            }
+
+            case '2':
+                cout << "Modificar jugador\n";
+                cout << "\n"; // Aquí puedes agregar la lógica correspondiente
+                break;
+
+            case '3':
+                cout << "Visualizar la ficha técnica de un jugador\n";
+                cout << "\n"; // Aquí puedes agregar la lógica correspondiente
+                break;
+
+            case '4':
+                cout << "Buscar un jugador por número de camiseta, país y año\n";
+                cout << "\n"; // Aquí puedes agregar la lógica correspondiente
+                break;
+
+            case '5':
+                cout << "Conocer los equipos del álbum que participaron en un año dado\n";
+                cout << "\n"; // Aquí puedes agregar la lógica correspondiente
+                break;
+
+            case '6':
+                cout << "Conocer la edad más común de un equipo\n";
+                cout << "\n"; // Aquí puedes agregar la lógica correspondiente
+                break;
+
+            case '7':
+                cout << "Conocer el porcentaje de completitud del álbum, discriminado por tipo de lámina.\n";
+                cout << "\n"; // Aquí puedes agregar la lógica correspondiente
+                break;
+
+            case '8':
+                cout << "Saliendo del programa...\n";
+                break;
+
+            default:
+                cout << opcion << " no es una opción válida.\n\n";
+        }
+
+    } while (opcion != '8');
+    
+    return 0; // Indica que el programa terminó correctamente
+}
