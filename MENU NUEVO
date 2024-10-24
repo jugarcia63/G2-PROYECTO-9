@@ -1,0 +1,174 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+using namespace std;
+
+struct Jugador {
+    char nombre[50];
+    int edad;
+    char posicion[50];
+    char pais[50];
+    int numeroCamiseta;
+};
+
+const int MAX_JUGADORES = 11;
+Jugador jugadores[MAX_JUGADORES];
+int totalJugadores = 0;
+
+int main() {
+    char opcion;
+
+    do {
+        cout << "  \n";
+        cout << "  Bienvenido a mi álbum de fútbol digital\n";
+        cout << "  ====================================\n";
+        cout << "  1.  Agregar jugador\n";
+        cout << "  2.  Modificar la información de un jugador\n";
+        cout << "  3.  Visualizar la ficha técnica de un jugador\n";
+        cout << "  4.  Buscar un jugador por su número de camiseta y país\n";
+        cout << "  5.  Conocer los equipos del álbum que participaron en un año dado\n";
+        cout << "  6.  Conocer la edad más común de un equipo\n";
+        cout << "  7.  Conocer el porcentaje de completitud del álbum\n";
+        cout << "  8.  Salir\n";
+        cout << "  ====================================\n";
+        cout << "  Ingresa una opción: ";
+        cin >> opcion;
+        cout << endl;
+
+        switch (opcion) {
+        case '1': {
+            if (totalJugadores >= MAX_JUGADORES) {
+                cout << "El álbum está lleno, no se pueden agregar más jugadores.\n";
+                break;
+            }
+
+            Jugador jugador;
+            cout << "Ingrese el nombre del jugador: ";
+            cin >> jugador.nombre;
+            cout << "Ingrese la edad del jugador: ";
+            cin >> jugador.edad;
+            cout << "Ingrese la posición del jugador: ";
+            cin >> jugador.posicion;
+            cout << "Ingrese el país del jugador: ";
+            cin >> jugador.pais;
+            cout << "Ingrese el número de camiseta: ";
+            cin >> jugador.numeroCamiseta;
+
+            jugadores[totalJugadores] = jugador;
+            totalJugadores++;
+            cout << "Jugador agregado exitosamente.\n";
+            break;
+        }
+
+        case '2': {
+            int numeroCamiseta;
+            cout << "Ingrese el número de camiseta del jugador a modificar: ";
+            cin >> numeroCamiseta;
+
+            for (int i = 0; i < totalJugadores; i++) {
+                if (jugadores[i].numeroCamiseta == numeroCamiseta) {
+                    cout << "Ingrese el nuevo nombre del jugador: ";
+                    cin >> jugadores[i].nombre;
+                    cout << "Ingrese la nueva edad del jugador: ";
+                    cin >> jugadores[i].edad;
+                    cout << "Ingrese la nueva posición del jugador: ";
+                    cin >> jugadores[i].posicion;
+                    cout << "Ingrese el nuevo país del jugador: ";
+                    cin >> jugadores[i].pais;
+                    cout << "Jugador modificado exitosamente.\n";
+                    break;
+                }
+            }
+            cout << "No se encontró ningún jugador con el número de camiseta " << numeroCamiseta << ".\n";
+            break;
+        }
+
+        case '3': {
+            int numeroCamiseta;
+            cout << "Ingrese el número de camiseta del jugador: ";
+            cin >> numeroCamiseta;
+
+            for (int i = 0; i < totalJugadores; i++) {
+                if (jugadores[i].numeroCamiseta == numeroCamiseta) {
+                    cout << "Ficha técnica del jugador:\n";
+                    cout << "Nombre: " << jugadores[i].nombre << endl;
+                    cout << "Edad: " << jugadores[i].edad << endl;
+                    cout << "Posición: " << jugadores[i].posicion << endl;
+                    cout << "País: " << jugadores[i].pais << endl;
+                    cout << "Número de camiseta: " << jugadores[i].numeroCamiseta << endl;
+                    break;
+                }
+            }
+            cout << "No se encontró ningún jugador con el número de camiseta " << numeroCamiseta << ".\n";
+            break;
+        }
+
+        case '4': {
+            int numeroCamiseta;
+            char pais[50];
+            cout << "Ingrese el número de camiseta: ";
+            cin >> numeroCamiseta;
+            cout << "Ingrese el país: ";
+            cin >> pais;
+
+            for (int i = 0; i < totalJugadores; i++) {
+                if (jugadores[i].numeroCamiseta == numeroCamiseta && strcmp(jugadores[i].pais, pais) == 0) {
+                    cout << "Jugador encontrado: " << jugadores[i].nombre << " de " << jugadores[i].pais << endl;
+                    break;
+                }
+            }
+            cout << "No se encontró ningún jugador con el número de camiseta " << numeroCamiseta << " y país " << pais << ".\n";
+            break;
+        }
+
+        case '5': {
+            cout << "Equipos que participaron en un año dado (ejemplo: año 2022):\n";
+            // Aquí podrías agregar una lista de equipos. 
+            // Por simplicidad, solo mostramos un mensaje.
+            cout << "Ejemplo: Equipo A, Equipo B, Equipo C\n"; // Simulación
+            break;
+        }
+
+        case '6': {
+            if (totalJugadores == 0) {
+                cout << "No hay jugadores para calcular la edad más común.\n";
+                break;
+            }
+
+            int edades[101] = {0}; // Asumimos edades de 0 a 100
+            for (int i = 0; i < totalJugadores; i++) {
+                edades[jugadores[i].edad]++;
+            }
+
+            int edadMasComun = 0;
+            int maxFrecuencia = 0;
+            for (int i = 0; i < 101; i++) {
+                if (edades[i] > maxFrecuencia) {
+                    maxFrecuencia = edades[i];
+                    edadMasComun = i;
+                }
+            }
+
+            cout << "La edad más común entre los jugadores es: " << edadMasComun << " años.\n";
+            break;
+        }
+
+        case '7': {
+            double porcentajeCompletitud = (static_cast<double>(totalJugadores) / MAX_JUGADORES) * 100;
+            cout << "El porcentaje de completitud del álbum es: " << porcentajeCompletitud << "%.\n";
+            break;
+        }
+
+        case '8':
+            cout << "Saliendo del programa...\n";
+            break;
+
+        default:
+            cout << opcion << " no es una opción válida.\n";
+        }
+
+    } while (opcion != '8');
+
+    return 0;
+}
